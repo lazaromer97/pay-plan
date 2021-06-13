@@ -1,0 +1,115 @@
+{% extends '../core-base.html' %}
+{% load static %}
+
+{% block title %}Payment Plan{% endblock title %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href={% static 'admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}>
+{% endblock stylesheets %}
+
+{% block body %}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Listado de Payment Plans</h3>
+            <div class="card-toold">
+                <a class="btn btn-xs btn-success float-right" title="Crear Payment Plan"
+                    href={% url 'payment_plan_create'%}>
+                    <span class="fas fa-plus nav-icon"></span>
+                    Crear Payment Plan
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tablaPaymentPlans" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th>Recurrente</th>
+                            <th>Operaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if payment_plans %}
+                        {% for payment_plan in payment_plans %}
+                        <tr>
+                            <td>{{payment_plan.name}}</td>
+                            <td>{{payment_plan.value}} USD</td>
+                            <td>{% if payment_plan.recurring %}Si{% else %}No{% endif %}</td>
+                            <td>
+
+                                <a class="btn btn-xs btn-warning" title="Editar"
+                                    href={% url 'payment_plan_update' payment_plan.id%}>
+                                    <span class="fas fa-edit nav-icon"></span>
+                                </a>
+
+                                <a class="btn btn-xs btn-danger" title="Eliminar"
+                                    href={% url 'payment_plan_delete' payment_plan.id%}>
+                                    <span class="fas fa-trash nav-icon"></span>
+                                </a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th>Recurrente</th>
+                            <th>Operaciones</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+<script src={% static 'admin/plugins/datatables/jquery.dataTables.js' %}></script>
+<script src={% static 'admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}></script>
+
+<script>
+    $(() => {
+        $('#administrar').addClass('active')
+        $('#payment_plan').addClass('active')
+        $('#tablaPaymentPlans').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay información para mostrar",
+                "info": "Mostrando _START_ - _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 - 0 de 0 entradas",
+                "infoFiltered": "(Filtro de _MAX_ total de entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "No se encontraron coincidencias",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": Activar orden de columna ascendente",
+                    "sortDescending": ": Activar orden de columna desendente"
+                }
+            }
+        });
+    })
+</script>
+{% endblock javascripts %}

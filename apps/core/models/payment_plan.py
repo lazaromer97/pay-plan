@@ -14,4 +14,4 @@ class PaymentPlan(models.Model):
         permissions = [('gestionar_payment_plan', 'Puede gestionar Payments Plans')]
 
     def __str__(self):
-        self.name
+        return self.name

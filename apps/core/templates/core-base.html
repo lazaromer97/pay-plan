@@ -44,17 +44,17 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-header">Operaciones</span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href={% url 'dashboard' %} class="dropdown-item">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             Dashboard
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href={% url 'password_change' %} class="dropdown-item">
                             <i class="nav-icon fas fa-key"></i>
                             Cambiar Contraseña
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href={% url 'logout' %} class="dropdown-item">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             Logout
                         </a>
@@ -82,7 +82,7 @@
                             alt="Imagen del Usuario" />
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ user.username | upper }}</a>
+                        <a href="#" class="d-block">{{ user.email }}</a>
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@
             <strong>
                 Copyright &copy;
                 <script>
-                    let from = 2020;
+                    let from = 2021;
                     let to = new Date().getFullYear();
                     document.write(from === to ? to : `${from}-${to}`);
                 </script>

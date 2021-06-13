@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PaymentPlan - Registrarse</title>
+    
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href={% static "theme/img/favicon.png" %} type="image/x-icon">
+
+    <link rel="stylesheet" href={% static 'account/css/fonts.css' %}>
+    <link rel="stylesheet" href={% static 'account/fontawesome/css/font-awesome.min.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/normalize.min.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/messages.css' %}>
+    <script src={% static 'account/js/prefixfree.min.js' %}></script>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="wrapper">
+        {% if form.errors %}
+            {% if form.email.errors %}
+                <p class="title message"><i class="fa fa-circle-o"></i> {{ form.email.errors.as_text }}</p>
+            {% endif %}
+            {% if form.password1.errors %}
+                <p class="title message"><i class="fa fa-circle-o"></i> {{ form.password1.errors.as_text }}</p>
+            {% endif %}
+            {% if form.password2.errors %}
+                <p class="title message"><i class="fa fa-circle-o"></i> {{ form.password2.errors.as_text }}</p>
+            {% endif %}
+        {% endif %}
+
+        <form class="login" method="POST">
+            {% csrf_token %}
+            <p class="title">Registrarse</p>
+            {{ form.email }}
+            <i class="fa fa-envelope"></i>
+            {{ form.password1 }}
+            <i class="fa fa-key"></i>
+            {{ form.password2 }}
+            <i class="fa fa-key"></i>
+            <button type="submit">
+                <span class="state">Registrarse</span>
+            </button>
+        </form>
+        <footer>
+            <strong>Copyright &copy; <span id="copy-year"></span>.</strong>
+            <a href="#">PaymentPlan</a>. Todos los derechos reservados.
+            <div>
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+    <!-- partial -->
+    <script src={% static 'account/js/jquery.min.js' %}></script>
+  <script>
+    $("#copy-year").html(new Date().getFullYear())
+  </script>
+</body>
+
+</html>

@@ -18,7 +18,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admon/', admin.site.urls),
-    path('admin/', include(('apps.core.urls', 'core')))
+    path('admin/', include('apps.core.urls')),
+    path('account/', include('apps.authentication.urls')),
 ]
 
 # URL pattern for serving files in debug mode

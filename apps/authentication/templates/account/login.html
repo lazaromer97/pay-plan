@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PaymentPlan - Login</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href={% static "theme/img/favicon.png" %} type="image/x-icon">
+
+    <link rel="stylesheet" href={% static 'account/css/fonts.css' %}>
+    <link rel="stylesheet" href={% static 'account/fontawesome/css/font-awesome.min.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/normalize.min.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'account/css/messages.css' %}>
+    <script src={% static 'account/js/prefixfree.min.js' %}></script>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="wrapper">
+        {% if form.errors %}
+            <p class="title message"><i class="fa fa-circle-o"></i> * Su usuario y contraseña no se encuentran. Por favor inténtelo de nuevo.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p class="title message"><i class="fa fa-circle-o"></i> * Su cuenta no tiene acceso a esta página. Para proceder,
+                    por favor acceda con una cuenta que tenga permisos.</p>
+            {% else %}
+                <p class="title message"><i class="fa fa-circle-o"></i> * Por favor acceda para ver esta página.</p>
+            {% endif %}
+        {% endif %}
+
+        <form class="login" method="POST">
+            {% csrf_token %}
+            <p class="title">Login</p>
+            {{ form.username }}
+            <i class="fa fa-envelope"></i>
+            {{ form.password }}
+            <i class="fa fa-key"></i>
+            <button type="submit">
+                <span class="state">Login</span>
+            </button>
+        </form>
+        <footer>
+            <strong>Copyright &copy; <span id="copy-year"></span>.</strong>
+            <a href="#">PaymentPlan</a>. Todos los derechos reservados.
+            <div>
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+    <!-- partial -->
+    <script src={% static 'account/js/jquery.min.js' %}></script>
+  <script>
+    $("#copy-year").html(new Date().getFullYear())
+  </script>
+</body>
+
+</html>

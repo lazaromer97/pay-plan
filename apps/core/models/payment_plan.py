@@ -7,10 +7,11 @@ class PaymentPlan(models.Model):
     value = models.DecimalField(verbose_name='Value', max_digits=8, decimal_places=2)
     recurring = models.BooleanField(verbose_name='Recurring', default=False)
 
-    def __str__(self):
-        self.name
-
     class Meta:
         db_table = 'payment_plan'
         verbose_name = 'Payment Plan'
         verbose_name_plural = 'Payment Plans'
+        permissions = [('gestionar_payment_plan', 'Puede gestionar Payments Plans')]
+
+    def __str__(self):
+        self.name
